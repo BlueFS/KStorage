@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero is-fullheight-with-navbar">
+        <div class="hero-body">
+            <div class="container has-text-centered is-align-items-center is-flex is-flex-direction-column">
+                <p class="title is-size-1">KStorage</p>
+                <p class="subtitle is-size-3">Cloud storage made simple and easy</p>
+                <p class="subtitle is-size-6">(Totally not just for a project)</p>
+                <button class="button is-block is-medium" id="get_started">
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('main.profile') }}" class="get-started has-text-dark">Get started!</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}" class="has-text-dark">Get started!</a>
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </section>
+{% endblock %}

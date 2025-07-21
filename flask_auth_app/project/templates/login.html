@@ -1,0 +1,51 @@
+<!-- This knowledge was gained from Digital Ocean on how to create a login page -->
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero is-fullheight-with-navbar">
+        <div class="hero-body">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title">Login</h3>
+                <div class="box">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="notification is-danger">
+                                {{ messages[0] }}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    <form method="POST" action="/login">
+                        <div class="field">
+                        <!-- Email -->
+                            <div class="control">
+                                <input autofocus="" class="input is-large" type="email" name="email" placeholder="Your email" required>
+                            </div>
+                        </div>
+
+                    <!-- Password -->
+                        <div class="field">
+                            <div class="control">
+                                <input autofocus="" class="input is-large" type="password" name="password" placeholder="Your password" required>
+                            </div>
+                        </div>
+
+                    <!-- Remember checkbox -->
+                        <div class="checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" name="remember">
+                                Remember me
+                            </label>
+                        </div>
+                        <button class="button is-block is-info is-large is-fullwidth">Login</button>
+                    </form>
+                    <div class="">
+                        <p>
+                            Don't have an account? Sign up
+                            <a href="{{ url_for('auth.signup') }}"><u>here.</u></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

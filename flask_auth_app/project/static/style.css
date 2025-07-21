@@ -1,0 +1,23 @@
+:root {
+    --has-light: hsl(0, 0%, 96%);
+    --has-info: hsl(204, 86%, 53%);
+    --has-link: hsl(217, 71%, 53%);
+    --has-dark: hsl(0, 0%, 21%);
+}
+
+.navbar-item {
+    transition: ease-in-out .2s;
+}
+
+.button {
+    transition: ease-in-out .2s;
+}
+
+.navbar-item:hover {
+    background-color: var(--has-link) !important;
+    color: var(--has-light) !important;
+}
+
+.button:hover {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3) !important;
+}

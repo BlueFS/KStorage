@@ -1,0 +1,21 @@
+Project plan:
+
+Create a website similar to google drive where you can save files to and download later.
+
+How to achieve this:
+1. Create a layout.html
+2. Create an app.py file
+3. Create respective html pages (login, homepage, etc.)
+4. Utilize db's to store email and password
+    - Use what was learned in finance lesson to achieve this
+5. Use CSS to beautify page
+6. Add features to upload files (zip it before saving to server)
+7. Add features to download files
+8. Have ability to logout and change password
+
+
+Websites to help learn:
+https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login
+
+Bulma documentation at: bulma.io
+

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Change email -->
+    <div class="column is-4 is-offset-4">
+
+        <h3 class="title">Change name</h3>
+        <div class="box">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% for category, message in messages %}
+                    {% if category == 'name' %}
+                        <div class="notification is-danger">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+            <form method="POST" action="/name_change">
+                <div class="field">
+                    <div class="control">
+                        <input autofocus="" type="text" class="input is-large" name="new_name" id="new_name" placeholder="New name" required>
+                    </div>
+                    <p class="help">New name cannot be same as current name</p>
+                </div>
+                <button class="button is-block is-info is-large is-fullwidth">Change name</button>
+            </form>
+        </div>
+
+        <h3 class="title">Change email</h3>
+        <div class="box">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% for category, message in messages %}
+                    {% if category == 'email' %}
+                        <div class="notification is-danger">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+            <form method="POST" action="/email_change">
+                <div class="field">
+                    <div class="control">
+                        <input autofocus="" type="email" class="input is-large" name="email_current" id="email_current" placeholder="Current email" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input type="email" class="input is-large" name="email_new" id="email_new" placeholder="New email" required>
+                    </div>
+                    <p class="help">New email cannot be the same as current email.</p>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input type="email" class="input is-large" name="email_confirm" id="email_confirm" placeholder="Confirm email" required>
+                    </div>
+                </div>
+                <button class="button is-block is-info is-large is-fullwidth">Change email</button>
+                <p class="help"><b>By changing your email, you will be prompted to log back in</b></p>
+            </form>
+        </div>
+
+    <!-- Change password -->
+        <h3 class="title">Change password</h3>
+        <div class="box">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% for category, message in messages %}
+                    {% if category == 'password' %}
+                        <div class="notification is-danger">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endwith %}
+            <form method="POST" action="/password_change">
+                <div class="field">
+                    <div class="control">
+                        <input autofocus="" type="password" class="input is-large" name="password_current" id="password_current" placeholder="Current password" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input type="password" class="input is-large" name="password_new" id="password_new" placeholder="New password" required>
+                    </div>
+                    <p class="help">New password cannot be the same as current password.</p>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input type="password" class="input is-large" name="password_confirm" id="password_confirm" placeholder="Confirm password" required>
+                    </div>
+                </div>
+                <button class="button is-block is-info is-large is-fullwidth">Change password</button>
+                <p class="help"><b>By changing your password, you will be prompted to log back in</b></p>
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}

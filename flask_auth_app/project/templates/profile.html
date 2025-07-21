@@ -1,0 +1,116 @@
+<!-- Bulma's upload file feature and CSS used/continued here-->
+{% extends "base.html" %}
+
+{% block content %}
+<!-- If successful upload -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% for category, message in messages %}
+            {% if category == 'success' %}
+                <div class="notification is-success">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+<!-- If empty file -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% for category, message in messages %}
+            {% if category == 'empty' %}
+                <div class="notification is-warning">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+<!-- If could not upload -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% for category, message in messages %}
+            {% if category == 'failed' %}
+                <div class="notification is-danger">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+
+<!-- Greets user -->
+    <section class="section is-small">
+        <h1 class="title">
+            Welcome {{ name }}
+        </h1>
+        <p class="subtitle">
+            What would you like to do today?
+        </p>
+    </section>
+<!-- Upload files -->
+
+    <h1 class="title">
+        Upload files
+    </h1>
+
+<!-- Upload file button -->
+    <div class="box is-inline-block">
+        <form class="upload_file" id="upload_file" enctype="multipart/form-data" method="POST" action="/upload">
+            <div class="field">
+                <div id="file-upload" class="file is-centered is-boxed is-light has-name">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="resume" />
+                        <span class="file-cta" id="file-cta" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 200px; width: 200px;">
+                            <span class="file-icon" id="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label" id="file-label"> Choose a file… </span>
+                            <img id="preview-image" style="display: none; max-height: 100%; max-width: 150px; object-fit: contain;" />
+                        </span>
+                        <span class="file-name" id="file-name-box" style="display: inline-block; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"> No file uploaded </span>
+                    </label>
+                </div>
+            </div>
+            <div class="field">
+                <button class="button is-light" type="submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+<!-- Download files table -->
+    <section class="section">
+        <h1 class="title">
+            Download files
+        </h1>
+        <div class="box">
+            <div class="table-container">
+                <table class="table is-bordered is-fullwidth is-striped is-narrow">
+                    <thead>
+                        <th>Name</th>
+                        <th>Date Uploaded</th>
+                        <th>Delete</th>
+                        <th>Download</th>
+                    </thead>
+                <!-- Retrieve information from a DB and give option to download-->
+                    <tbody>
+                        {% for file in files %}
+                            <tr>
+                        <!-- Used ChatGPT to get the formatting for time -->
+                                <td>{{ file.filename }}</td>
+                                <td>{{ file.date_uploaded.strftime('%m-%d-%Y') }}</td>
+                                <td>
+                                    <form method="POST" action="{{ url_for('main.delete_file', file_id=file.id) }}">
+                                        <button class="button is-small is-danger" type="submit">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <a class="button is-small is-link" href="{{ url_for('main.download_file', file_id=file.id) }}">Download</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}

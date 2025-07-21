@@ -1,0 +1,60 @@
+<!-- This knowledge was gained from Digital Ocean on how to create a login page -->
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KStorage</title>
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet from bulma. Bulma.io -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Script for the JS's -->
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+
+<!-- TODO: ADD COLORS-->
+
+<body class="has-background-white-ter" style="min-height: 100vh">
+    <!-- Navbar -->
+    <nav class="navbar has-background-white-ter" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <div class="navbar-start">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="options">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Check if user is logged in -->
+        <div class="navbar-menu navbar-end has-background-white-ter" id="options">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.index') }}" class="navbar-item">Home</a>
+                <a href="{{ url_for('main.profile') }}" class="navbar-item">Profile</a>
+                <a href="{{ url_for('main.settings') }}" class="navbar-item">Settings</a>
+                <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
+            {% else %}
+                <a href="{{ url_for('main.index') }}" class="navbar-item">Home</a>
+                <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
+                <a href="{{ url_for('auth.signup') }}" class="navbar-item">Signup</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container has-text-centered">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+
+<footer>
+    <div class="content has-text-centered">
+        <p class="is-size-7">
+            &#169 KStorage by Kristian Cybul
+        </p>
+    </div>
+</footer>
