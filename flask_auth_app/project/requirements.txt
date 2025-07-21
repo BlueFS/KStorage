@@ -1,4 +1,5 @@
-# ChatGPT was used to get correct version numbers and to check/remove unecessary libraries
+# ChatGPT was used to get correct version numbers and to check/remove unecessary libraries 
+gunicorn
 Flask>=2.0.0
 Flask-Login>=0.6.0
 Flask-Session>=0.4.0
